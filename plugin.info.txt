@@ -1,0 +1,7 @@
+base   cosmourlaub
+author Andreas Gohr
+email  gohr@cosmocode.de
+date   2012-04-11
+name   cosmourlaub plugin
+desc   Aggregate CosmoCode Vacation times
+url    http://example.com
