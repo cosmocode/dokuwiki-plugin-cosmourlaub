@@ -3,10 +3,6 @@
 The plugin isn't configured completely, yet. Please follow these steps:
 
   - Go to https://code.google.com/apis/console and login
-  - Create a new Project
-  - Enable the Calendar API
-  - Switch to the API Access Tab and click the "Create an OAuth 2.0 Client ID" button
-    * Enter a name, optionally add a logo graphic
-    * Select "Installed Application"
-  - Configure the client ID, client secret and API key (from the //Simple API Access// section) in the [[?do=admin&page=config#plugin____cosmourlaub____plugin_settings_name|Config Manager]]
-  - When done, return here and use the following link to authenticate the plugin. Be sure to login with a Google account that has at least read-only permissions to all calendars in question.
+  - Create a new Calendar Project, use the redirect URL shown below to register the project
+  - Configure the client ID, client secret and API Key (from the //Simple API Access// section) in the [[?do=admin&page=config#plugin____cosmourlaub____plugin_settings_name|Config Manager]]
+  - When done, return here and follow the redirect URL link below to authenticate the plugin. Be sure to login with a Google account that has at least read-only permissions to all calendars in question

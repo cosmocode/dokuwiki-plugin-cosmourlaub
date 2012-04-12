@@ -46,7 +46,7 @@ class admin_plugin_cosmourlaub extends DokuWiki_Admin_Plugin {
         }else{
             echo $this->locale_xhtml('auth');
             $redir = DOKU_URL.'lib/plugins/cosmourlaub/api.php';
-            echo '<p><a href="'.$redir.'" class="button">'.$this->getLang('authenticate').'</a></p>';
+            echo '<p>Redirect-URI for authentication: <a href="'.$redir.'">'.$redir.'</a></p>';
         }
     }
 }
