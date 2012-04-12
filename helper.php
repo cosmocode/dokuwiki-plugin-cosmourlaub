@@ -57,6 +57,14 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
         if($authdata) file_put_contents($this->authfile,$authdata);
     }
 
+    /**
+     * The actual API workhorse
+     *
+     * Fetches data from all accessible calendars and stores the
+     * vacation durations in the data file
+     *
+     * @todo only fetch current year (and last year if still january)
+     */
     function update_data(){
         $data = array();
 
@@ -113,12 +121,22 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
         file_put_contents($this->datafile,serialize($data));
     }
 
-
+    /**
+     * Return the stored data
+     */
     public function get_data(){
         if(file_exists($this->datafile)){
             return unserialize(file_get_contents($this->datafile));
         }
         return array();
+    }
+
+    /**
+     * Should the auto update run?
+     */
+    public function needs_update(){
+        global $conf;
+        return (@filemtime($this->datafile) < time() - $conf['cachetime']);
     }
 }
 

@@ -31,9 +31,15 @@ class action_plugin_cosmourlaub extends DokuWiki_Action_Plugin {
             echo 'cosmourlaub: not authenticated'.DOKU_LF;
             return;
         }
+        if(!$hlp->needs_update()){
+            echo 'cosmourlaub: data up to date'.DOKU_LF;
+            return;
+        }
 
         echo 'cosmourlaub: started'.DOKU_LF;
         $hlp->update_data();
+        $event->stopPropagation();
+        $event->preventDefault();
         echo 'cosmourlaub: finished'.DOKU_LF;
     }
 
