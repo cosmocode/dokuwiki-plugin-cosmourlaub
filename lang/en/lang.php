@@ -16,6 +16,6 @@ $lang['past']      = 'Taken';
 $lang['future']    = 'Planned';
 $lang['available'] = 'Available';
 $lang['update']    = 'Update Google Calendar Data';
-
+$lang['authenticate'] = 'Authenticate the Plugin for Google Calendar Access';
 
 //Setup VIM: ex: et ts=4 :
