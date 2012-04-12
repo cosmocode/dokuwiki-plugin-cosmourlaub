@@ -6,5 +6,6 @@
  */
 
 
-//$meta['fixme'] = array('string');
-
+$meta['client_id']     = array('string');
+$meta['client_secret'] = array('string');
+$meta['devel_key']     = array('string');

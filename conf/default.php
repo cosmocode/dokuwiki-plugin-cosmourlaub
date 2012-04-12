@@ -5,4 +5,7 @@
  * @author Andreas Gohr <gohr@cosmocode.de>
  */
 
-//$conf['fixme']    = 'FIXME';
+$conf['client_id']     = '';
+$conf['client_secret'] = '';
+$conf['devel_key']     = '';
+

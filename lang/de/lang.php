@@ -10,12 +10,10 @@
 
 // custom language strings for the plugin
 $lang['name']      = 'Name';
-$lang['days']      = 'Vacation Days';
-$lang['rest']      = 'Residual Leave';
-$lang['past']      = 'Taken';
-$lang['future']    = 'Planned';
-$lang['available'] = 'Available';
-
-
+$lang['days']      = 'Urlaubstage';
+$lang['rest']      = 'Resturlaub';
+$lang['past']      = 'Genommen';
+$lang['future']    = 'Geplant';
+$lang['available'] = 'Verfügbar';
 
 //Setup VIM: ex: et ts=4 :
