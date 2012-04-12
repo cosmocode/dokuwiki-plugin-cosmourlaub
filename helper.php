@@ -15,7 +15,6 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
     public $calService;
 
     private $authfile;
-    private $datafile;
 
     function __construct(){
         if(!$this->getConf('client_id') ||
@@ -35,8 +34,6 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
         $this->client->setRedirectUri(DOKU_URL.'lib/plugins/cosmourlaub/api.php');
         $this->client->setDeveloperKey($this->getConf('devel_key'));
         $this->calService = new apiCalendarService($this->client);
-
-        $this->datafile = getCacheName('cosmourlaub','.data.cosmourlaub');
 
         // try to authenticate
         $this->authfile = getCacheName('cosmourlaub','.auth.cosmourlaub');
@@ -69,12 +66,13 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
         $data = array();
 
         $now = new DateTime('now');
+        $limit = array('timeMin' => $this->current_year().'-01-01T00:00:00+00:00');
+
 
         if($debug) echo '<ul>';
-
         $calList = $this->calService->calendarList->listCalendarList();
         foreach($calList['items'] as $calendar){
-            $events = $this->calService->events->listEvents($calendar['id']);
+            $events = $this->calService->events->listEvents($calendar['id'],$limit);
             if(isset($events['items'])) foreach($events['items'] as $event){
                 if(!preg_match($this->getConf('regex'),$event['summary'])) continue;
 
@@ -128,19 +126,43 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
                 }
             }
         }
-
         if($debug) echo '</ul>';
 
         #print_r($data); #debugging
-        file_put_contents($this->datafile,serialize($data));
+        foreach($data as $year => $info){
+            file_put_contents($this->data_file($year),serialize($info));
+        }
+    }
+
+    /**
+     * Where is the data stored for the given year?
+     */
+    public function data_file($year){
+        return getCacheName("cosmourlaub",".$year.cosmourlaub");
+    }
+
+    /**
+     * Returns the current year, except when the current year is very young
+     * then the last year is returned
+     */
+    public function current_year(){
+        $year  = date('Y');
+        $month = date('n');
+
+        if($month < 2){
+            return $year - 1;
+        }else{
+            return $year;
+        }
     }
 
     /**
      * Return the stored data
      */
-    public function get_data(){
-        if(file_exists($this->datafile)){
-            return unserialize(file_get_contents($this->datafile));
+    public function get_data($year){
+        $file = $this->data_file($year);
+        if(file_exists($file)){
+            return unserialize(file_get_contents($file));
         }
         return array();
     }
@@ -150,7 +172,8 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
      */
     public function needs_update(){
         global $conf;
-        return (@filemtime($this->datafile) < time() - $conf['cachetime']);
+        $year = $this->current_year();
+        return (@filemtime($this->data_file($year)) < time() - $conf['cachetime']);
     }
 }
 

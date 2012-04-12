@@ -1,4 +1,7 @@
 ====== Vacation Listing ======
 
-This interface allows you to manually update the data fetched from the Google calendars of your employes and helps you to debug any irregularities.
+This interface allows you to manually update the data fetched from the Google calendars and helps you to debug any irregularities. Vacation times are calculated in days in a .5 granularity. Full day events count as one day. Timed events count as a half day when the time frame is 4 hours or lower, everything above is a full day.
 
+Employes should not create vacation events on weekends, public holidays or days they don't work anyway. The plugin will **not** detect such conditions and will calculate remaining vacation days in favour of the employer ;-).
+
+Note that the plugin will process all calendars it has access to, even if the data will not be used by the syntax plugin later.

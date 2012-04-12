@@ -77,8 +77,8 @@ class syntax_plugin_cosmourlaub extends DokuWiki_Syntax_Plugin {
     public function render($mode, &$R, $data) {
         if($mode != 'xhtml') return false;
         $hlp     = plugin_load('helper','cosmourlaub');
-        $caldata = $hlp->get_data();
         $year    = $data['year'];
+        $caldata = $hlp->get_data($year);
 
         $R->table_open();
         $R->tablerow_open();
@@ -103,8 +103,8 @@ class syntax_plugin_cosmourlaub extends DokuWiki_Syntax_Plugin {
         $R->tablerow_close();
 
         foreach($data['users'] as $id => $user){
-            if(isset($caldata[$year][$id])){
-                extract($caldata[$year][$id]);
+            if(isset($caldata[$id])){
+                extract($caldata[$id]);
             }else{
                 $name   = $id;
                 $past   = 0;
