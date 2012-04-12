@@ -6,7 +6,7 @@
  */
 
 // menu entry for admin plugins
-// $lang['menu'] = 'Your menu entry';
+$lang['menu'] = 'Urlaubsverwaltung';
 
 // custom language strings for the plugin
 $lang['name']      = 'Name';

@@ -6,7 +6,7 @@
  */
 
 // menu entry for admin plugins
-// $lang['menu'] = 'Your menu entry';
+$lang['menu'] = 'Vacation Listing';
 
 // custom language strings for the plugin
 $lang['name']      = 'Name';
@@ -15,7 +15,7 @@ $lang['rest']      = 'Residual Leave';
 $lang['past']      = 'Taken';
 $lang['future']    = 'Planned';
 $lang['available'] = 'Available';
-
+$lang['update']    = 'Update Google Calendar Data';
 
 
 //Setup VIM: ex: et ts=4 :

@@ -16,25 +16,12 @@ if(!$hlp->client){
 if (isset($_GET['code'])) {
     $hlp->client->authenticate();
     $hlp->store_auth();
-    echo 'The plugin is now authenticated and will do it\'s magic';
-    dbg($hlp->client->getAccessToken());
+    if(!$hlp->client->getAccessToken()){
+        die('Something went wrong :-(');
+    }
+    send_redirect(wl('',array('do'=>'admin','page'=>'cosmourlaub'),true,'&'));
 }else{
     $authUrl = $hlp->client->createAuthUrl();
     send_redirect($authUrl);
 }
 
-/*
-
-$calList = $cal->calendarList->listCalendarList();
-
-foreach($calList['items'] as $calendar){
-    if($calendar['id'] != 'agoh@cosmocode.de') continue;
-
-    $events = $cal->events->listEvents($calendar['id']);
-
-    dbg($events);
-}
-
-#    print "<h1>Calendar List</h1><pre>" . print_r($calList, true) . "</pre>";
-#listEvents($calendarId
-*/

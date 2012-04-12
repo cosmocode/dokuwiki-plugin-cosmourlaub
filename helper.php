@@ -65,10 +65,12 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
      *
      * @todo only fetch current year (and last year if still january)
      */
-    function update_data(){
+    function update_data($debug = false){
         $data = array();
 
         $now = new DateTime('now');
+
+        if($debug) echo '<ul>';
 
         $calList = $this->calService->calendarList->listCalendarList();
         foreach($calList['items'] as $calendar){
@@ -112,12 +114,24 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
                     $data[$year][$calendar['id']]['future'] += $days;
                 }
 
-                echo $calendar['id'].' '.$start->format('Y-m-d').' '.$days." days\n";
+
+                if($debug){
+                    echo '<li><div class="li">';
+                    echo '<b>'.$days.' days: </b> ';
+                    echo '<a href="'.$event['htmlLink'].'">';
+                    echo $start->format('Y-m-d').' ';
+                    echo hsc($event['summary']);
+                    echo '</a> ';
+                    echo $calendar['id'];
+                    echo '</li>';
+                    tpl_flush();
+                }
             }
         }
 
-        #print_r($data); #debugging
+        if($debug) echo '</ul>';
 
+        #print_r($data); #debugging
         file_put_contents($this->datafile,serialize($data));
     }
 
