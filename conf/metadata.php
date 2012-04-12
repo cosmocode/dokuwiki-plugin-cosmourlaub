@@ -5,7 +5,7 @@
  * @author Andreas Gohr <gohr@cosmocode.de>
  */
 
-
+$meta['redirecthack']  = array('onoff');
 $meta['client_id']     = array('string');
 $meta['client_secret'] = array('string');
 $meta['devel_key']     = array('string');

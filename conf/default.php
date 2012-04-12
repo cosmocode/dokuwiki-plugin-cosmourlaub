@@ -9,3 +9,4 @@ $conf['client_id']     = '';
 $conf['client_secret'] = '';
 $conf['devel_key']     = '';
 $conf['regex']         = '/Urlaub/i';
+$conf['redirecthack']  = 0;

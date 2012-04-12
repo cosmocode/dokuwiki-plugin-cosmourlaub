@@ -15,12 +15,19 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
     public $calService;
 
     private $authfile;
+    public  $redirecturi;
 
     function __construct(){
         if(!$this->getConf('client_id') ||
            !$this->getConf('client_secret') ||
            !$this->getConf('devel_key')) {
             return;
+        }
+
+        $this->redirecturi = DOKU_URL.'lib/plugins/cosmourlaub/api.php';
+        if($this->getConf('redirecthack')){
+            $this->redirecturi = 'http://www.splitbrain.org/_static/redirect.php?r='.
+                                 rawurlencode($this->redirecturi);
         }
 
         require_once(dirname(__FILE__).'/googleapi/apiClient.php');
@@ -31,7 +38,7 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
         $this->client->setApplicationName('CosmoCode Urlaubsverwaltung');
         $this->client->setClientId($this->getConf('client_id'));
         $this->client->setClientSecret($this->getConf('client_secret'));
-        $this->client->setRedirectUri(DOKU_URL.'lib/plugins/cosmourlaub/api.php');
+        $this->client->setRedirectUri($this->redirecturi);
         $this->client->setDeveloperKey($this->getConf('devel_key'));
         $this->calService = new apiCalendarService($this->client);
 
