@@ -74,7 +74,7 @@ class helper_plugin_cosmourlaub extends DokuWiki_Plugin {
         foreach($calList['items'] as $calendar){
             $events = $this->calService->events->listEvents($calendar['id']);
             if(isset($events['items'])) foreach($events['items'] as $event){
-                if(!preg_match('/Urlaub/i',$event['summary'])) continue;
+                if(!preg_match($this->getConf('regex'),$event['summary'])) continue;
 
                 #print_r($event); #debugging
 
